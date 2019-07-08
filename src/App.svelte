@@ -48,7 +48,7 @@
   </header>
   <Router {url}>
     <Route path="/" component={Home} {requestPlugin} />
-    <Route path="room/:id" component={Room} {requestPlugin} {QRCodePlugin} />
+    <Route path="/:id" component={Room} {requestPlugin} {QRCodePlugin} />
   </Router>
 
   <div class="footer">© PerfectWeek 2019</div>

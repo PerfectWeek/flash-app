@@ -10,7 +10,7 @@
     const res = await requestPlugin.getInstance().post("/rooms");
 
     if (res.status === 201) {
-      navigate(`/room/${res.data.room.id}`);
+      navigate(`/${res.data.room.id}`);
     } else {
       alert("An error occured, try again later");
     }
