@@ -1,88 +1,64 @@
 <script>
-  import { Link } from "svelte-routing";
+  import { navigate } from "svelte-routing";
+
+  export let requestPlugin;
 
   let slotsFoundCount = 0;
   const timeAverage = 27;
 
-  function increaseCount() {
-    slotsFoundCount += 1;
+  async function createRoom() {
+    const res = await requestPlugin.getInstance().post("/rooms");
+
+    if (res.status === 201) {
+      navigate(`/room/${res.data.room.id}`);
+    } else {
+      alert("An error occured, try again later");
+    }
   }
 </script>
 
 <style>
-  .home {
-    height: 100%;
-  }
-
-  .flex-component {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-  }
-
-  .btn {
+  .create-room {
+    margin-top: 1rem;
     background-color: black;
-    color: white;
-    cursor: pointer;
-    font-size: 1.5em;
-    padding: 2vh 2vw 2vh 2vw;
-    margin-top: 2.5vh;
+    border-color: black;
   }
 
-  .home-content {
-    justify-content: space-around;
-    margin: 0 5vw 0 5vw;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .headline {
-    font-size: 3em;
-    line-height: 150%;
-    margin: 0;
-  }
-
-  .right-part {
-    font-size: 2rem;
-  }
-
-  .infos {
-    list-style-type: none;
-    line-height: 120%;
-    padding: 0;
-  }
-
-  .question {
-    margin: 0;
+  .hero {
+    padding-top: 0;
+    padding-bottom: 2rem;
   }
 
 </style>
 
-<div class="home flex-component">
-  <div class="home-content flex-component">
-    <div class="left-part">
-      <h2 class="headline">
+<div class="container">
+  <div class="columns main-content">
+    <div class="column col-4 col-md-6 col-xs-12 col-mx-auto text-secondary">
+      <h1 class="hero">
         ORGANISEZ VOUS
         <br />
         GAGNEZ DU TEMPS
         <br />
         VIVEZ.
-      </h2>
-      <Link to="room">
-        <button class="create-room btn" on:click={increaseCount}>
+        <button class="btn btn-lg text-light create-room" on:click={createRoom}>
           TROUVER UN CRENEAU
         </button>
-      </Link>
+      </h1>
     </div>
-    <div class="right-part">
-    <h2 class="question">Flash <i>by PerfectWeek</i>, c'est quoi ?</h2>
-      <ul class="infos">
-        <li>Synchronisation automatique de l'agenda</li>
-        <li>Une interface simple et efficace</li>
-        <li>La revolution de la creation d'evenements</li>
-        <li>L'expertise PerfectWeek</li>
-      </ul>
+    <div class="column col-6 col-md-12 col-xs-12 text-dark text-large">
+      <div class="text-left">
+        <h2 class="question">
+          Flash
+          <i>by PerfectWeek,</i>
+          c'est quoi ?
+        </h2>
+        <ul class="infos">
+          <li>Synchronisation automatique de l'agenda</li>
+          <li>Une interface simple et efficace</li>
+          <li>La revolution de la creation d'evenements</li>
+          <li>L'expertise PerfectWeek</li>
+        </ul>
+      </div>
     </div>
   </div>
-
 </div>
