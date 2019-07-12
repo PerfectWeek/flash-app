@@ -24,6 +24,9 @@
     border-color: black;
   }
 
+  .create-room:hover {
+    color: black;
+  }
   .hero {
     padding-top: 0;
     padding-bottom: 2rem;
@@ -33,7 +36,7 @@
 
 <div class="container">
   <div class="columns main-content">
-    <div class="column col-4 col-md-6 col-xs-12 col-mx-auto text-secondary">
+    <div class="column col-4 col-md-12 col-xs-12 col-mx-auto text-secondary">
       <h1 class="hero">
         ORGANISEZ VOUS
         <br />
