@@ -1,12 +1,14 @@
 <script>
   import { onMount } from "svelte";
 
-  export let QRCodePlugin;
-  export let requestPlugin;
+  import * as RequestPlugin from "../plugins/Request.js";
+  import * as QRCodePlugin from "../plugins/QRCode.js";
+  import RoomInfo from "./RoomInfo.svelte";
+  import TimeSlots from "./TimeSlots.svelte";
+
   export let id;
 
-  let QRCodeImageSrc = "";
-  let roomMembers = [];
+  const requestPlugin = RequestPlugin.getInstance();
 
   onMount(async () => {
     QRCodeImageSrc = await generateQRCode();
@@ -36,7 +38,7 @@
   }
 
   function fetchRoomInfo() {
-    return requestPlugin.getInstance().get(`rooms/${id}`);
+    return requestPlugin.get(`rooms/${id}`);
   }
 
   async function googleAuth() {

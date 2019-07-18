@@ -1,13 +1,14 @@
 <script>
   import { navigate } from "svelte-routing";
-
-  export let requestPlugin;
+  import * as RequestPlugin from "../plugins/Request.js";
 
   let slotsFoundCount = 0;
   const timeAverage = 27;
 
+  const requestPlugin = RequestPlugin.getInstance();
+
   async function createRoom() {
-    const res = await requestPlugin.getInstance().post("/rooms");
+    const res = await requestPlugin.post("/rooms");
 
     if (res.status === 201) {
       navigate(`/${res.data.room.id}`);

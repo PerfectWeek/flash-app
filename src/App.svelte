@@ -5,8 +5,6 @@
   import Room from "./components/Room.svelte";
 
   export let url = "";
-  export let requestPlugin;
-  export let QRCodePlugin;
 
   function home() {
     navigate("/");
@@ -47,8 +45,8 @@
     </section>
   </header>
   <Router {url}>
-    <Route path="/" component={Home} {requestPlugin} />
-    <Route path="/:id" component={Room} {requestPlugin} {QRCodePlugin} />
+    <Route path="/" component={Home} />
+    <Route path="/:id" component={Room} />
   </Router>
 
   <div class="footer">© PerfectWeek 2019</div>
