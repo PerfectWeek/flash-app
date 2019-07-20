@@ -3,6 +3,7 @@
 
   import Home from "./components/Home.svelte";
   import Room from "./components/Room.svelte";
+  import Auth from "./components/Auth.svelte";
 
   export let url = "";
 
@@ -14,6 +15,7 @@
 <style>
   .app {
     background: linear-gradient(160deg, #1c4891, #5abc95);
+    background-color: white;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -37,7 +39,7 @@
 
 <div class="app">
   <header class="navbar">
-    <section class="navbar-center title text-light">
+    <section class="navbar-center title text-dark">
       <h2 on:click={home}>
         Flash
         <i>by PerfectWeek</i>
@@ -47,6 +49,7 @@
   <Router {url}>
     <Route path="/" component={Home} />
     <Route path="/:id" component={Room} />
+    <Route path="/auth" component={Auth} />
   </Router>
 
   <div class="footer">© PerfectWeek 2019</div>

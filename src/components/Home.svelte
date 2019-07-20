@@ -25,14 +25,10 @@
     border-color: black;
   }
 
-  .create-room:hover {
-    color: black;
-  }
   .hero {
     padding-top: 0;
     padding-bottom: 2rem;
   }
-
 </style>
 
 <div class="container">
@@ -44,7 +40,9 @@
         GAGNEZ DU TEMPS
         <br />
         VIVEZ.
-        <button class="btn btn-lg text-light create-room" on:click={createRoom}>
+        <button
+          class="btn btn-lg btn-primary text-light create-room"
+          on:click={createRoom}>
           TROUVER UN CRENEAU
         </button>
       </h1>
