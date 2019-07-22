@@ -17,7 +17,8 @@
 </script>
 
 <style>
-  .create-room {
+  .btn {
+    max-width: 400px;
     margin-top: 1rem;
     background-color: black;
     border-color: black;
@@ -31,7 +32,7 @@
 
 <div class="container">
   <div class="columns main-content">
-    <div class="column col-4 col-md-12 col-xs-12 col-mx-auto text-secondary">
+    <div class="column col-4 col-md-10 col-xs-11 col-mx-auto text-secondary">
       <h1 class="hero">
         ORGANISEZ VOUS
         <br />
@@ -39,13 +40,13 @@
         <br />
         VIVEZ.
         <button
-          class="btn btn-lg btn-primary text-light create-room"
+          class="btn btn-primary text-light create-room"
           on:click={createRoom}>
           TROUVER UN CRENEAU
         </button>
       </h1>
     </div>
-    <div class="column col-6 col-md-12 col-xs-12 text-dark text-large">
+    <div class="column col-6 col-md-10 col-xs-11 col-mx-auto text-dark text-large">
       <div class="text-left">
         <h2 class="question">
           Flash
