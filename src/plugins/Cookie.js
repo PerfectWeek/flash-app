@@ -7,3 +7,7 @@ export function get(name) {
 export function set(name, value) {
   Cookies.set(name, value);
 }
+
+export function remove(name) {
+  Cookies.remove(name);
+}

@@ -12,13 +12,13 @@
   let QRCodeImageSrc = "";
   let roomMembers = [];
   let timeSlots = [];
-  let accessToken = "";
-
-  const requestPlugin = RequestPlugin.getInstance();
+  let accessToken;
 
   onMount(async () => {
     QRCodeImageSrc = await generateQRCode();
-    const roomInfo = await fetchRoomInfo();
+    const roomInfo = await getRoomInfo(id);
+    accessToken = CookiePlugin.get(id);
+    console.log(accessToken);
     //roomMembers = roomInfo.data.room.members;
     roomMembers = [
       "matthias.alif@gmail.com",
@@ -39,27 +39,36 @@
     ];
   });
 
-  function waitForGoogleAuth(win) {
+  async function joinRoom(accessToken) {
+    console.log(accessToken);
+    const res = await RequestPlugin.joinRoom(id, accessToken);
+    console.log(res);
+  }
+
+  function getAccessToken(win) {
     var timer = setInterval(() => {
       if (win.closed) {
         clearInterval(timer);
         accessToken = CookiePlugin.get("access_token");
+        CookiePlugin.set(id, accessToken);
+        CookiePlugin.remove("access_token");
+        joinRoom(accessToken);
       }
     }, 1000);
   }
 
   async function googleAuth() {
-    const res = await requestPlugin.post("/authenticate");
+    const res = await RequestPlugin.authenticate();
     const win = window.open(res.data, "Login with Google");
-    waitForGoogleAuth(win);
+    getAccessToken(win);
   }
 
   function generateQRCode() {
     return QRCodePlugin.generate(window.location.href);
   }
 
-  function fetchRoomInfo() {
-    return requestPlugin.get(`rooms/${id}`);
+  function getRoomInfo(id) {
+    return RequestPlugin.getRoomInfo(id);
   }
 </script>
 

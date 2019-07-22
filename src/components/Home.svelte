@@ -5,10 +5,8 @@
   let slotsFoundCount = 0;
   const timeAverage = 27;
 
-  const requestPlugin = RequestPlugin.getInstance();
-
   async function createRoom() {
-    const res = await requestPlugin.post("/rooms");
+    const res = await RequestPlugin.createRoom();
 
     if (res.status === 201) {
       navigate(`/${res.data.room.id}`);
