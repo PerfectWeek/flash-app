@@ -14,11 +14,19 @@
   let timeSlots = [];
   let accessToken;
 
+  let startDate = new Date();
+  let endDate = new Date()
+  endDate.setDate(startDate.getDate() + 7);
+
   onMount(async () => {
     QRCodeImageSrc = await generateQRCode();
-    const roomInfo = await getRoomInfo(id);
+    const roomInfo = await getRoomInfo();
     accessToken = CookiePlugin.get(id);
     console.log(accessToken);
+    if (accessToken) {
+      const slots = await getFreeSlots();
+      console.log(slots);
+    }
     //roomMembers = roomInfo.data.room.members;
     roomMembers = [
       "matthias.alif@gmail.com",
@@ -40,9 +48,9 @@
   });
 
   async function joinRoom(accessToken) {
-    console.log(accessToken);
     const res = await RequestPlugin.joinRoom(id, accessToken);
-    console.log(res);
+    const slots = await getFreeSlots();
+    console.log(slots);
   }
 
   function getAccessToken(win) {
@@ -67,8 +75,12 @@
     return QRCodePlugin.generate(window.location.href);
   }
 
-  function getRoomInfo(id) {
+  function getRoomInfo() {
     return RequestPlugin.getRoomInfo(id);
+  }
+
+  function getFreeSlots() {
+    return RequestPlugin.getFreeSlots(id, accessToken, startDate, endDate);
   }
 </script>
 
@@ -78,7 +90,19 @@
 
 <div class="container">
   <div class="columns">
-    <RoomInfo {QRCodeImageSrc} {roomMembers} />
-    <TimeSlots {timeSlots} {googleAuth} {accessToken} />
+
+    <div class="card column col-mx-auto col-2 col-md-12 text-center text-dark">
+      <RoomInfo {QRCodeImageSrc} {roomMembers} />
+    </div>
+
+    <div class="card column col-mx-auto col-9 col-md-12">
+      {#if !accessToken}
+        <button class="btn btn-lg centered" on:click={googleAuth}>
+          Synchronisez votre calendrier Google
+        </button>
+      {:else}
+        <TimeSlots {timeSlots} {googleAuth} {accessToken} />
+      {/if}
+    </div>
   </div>
 </div>
