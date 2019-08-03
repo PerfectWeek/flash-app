@@ -46,7 +46,7 @@
         </button>
       </h1>
     </div>
-    <div class="column col-6 col-md-10 col-xs-11 col-mx-auto text-dark text-large">
+    <div class="column col-6 col-md-10 col-xs-11 col-mx-auto text-light text-large">
       <div class="text-left">
         <h2 class="question">
           Flash

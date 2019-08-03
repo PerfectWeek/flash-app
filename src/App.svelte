@@ -39,7 +39,7 @@
 
 <div class="app">
   <header class="navbar">
-    <section class="navbar-center title text-dark">
+    <section class="navbar-center title text-light">
       <h2 on:click={home}>
         Flash
         <i>by PerfectWeek</i>
