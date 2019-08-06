@@ -16,7 +16,6 @@
 
 <style>
   .app {
-    background: linear-gradient(160deg, #1c4891, #5abc95);
     background-color: white;
     height: 100%;
     display: flex;

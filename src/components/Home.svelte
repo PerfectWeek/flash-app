@@ -17,49 +17,53 @@
 </script>
 
 <style>
-  .btn {
-    max-width: 400px;
-    margin-top: 1rem;
-    background-color: black;
-    border-color: black;
+  .card {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
   }
 
-  .hero {
-    padding-top: 0;
-    padding-bottom: 2rem;
+  .headline {
+    font-family: "Circular";
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-size: 2.7rem;
+    color: midnightblue;
   }
+
+  .description {
+    max-width: 700px;
+    margin: auto;
+    color: midnightblue;
+  }
+
+  .create-room {
+    background-color: midnightblue;
+    border-radius: 40px;
+    width: 70%;
+    max-width: 400px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 2vh;
+  }
+
 </style>
 
-<div class="container">
-  <div class="columns main-content">
-    <div class="column col-4 col-md-10 col-xs-11 col-mx-auto text-secondary">
-      <h1 class="hero">
-        ORGANISEZ VOUS
-        <br />
-        GAGNEZ DU TEMPS
-        <br />
-        VIVEZ.
-        <button
-          class="btn btn-primary text-light create-room"
-          on:click={createRoom}>
-          TROUVER UN CRENEAU
-        </button>
-      </h1>
+<div class="card text-center text-light">
+  <div class="card-header">
+    <div class="card-title h1 headline">
+      ORGANISEZ VOUS, GAGNEZ DU TEMPS, VIVEZ.
     </div>
-    <div class="column col-6 col-md-10 col-xs-11 col-mx-auto text-light text-large">
-      <div class="text-left">
-        <h2 class="question">
-          Flash
-          <i>by PerfectWeek,</i>
-          c'est quoi ?
-        </h2>
-        <ul class="infos">
-          <li>Synchronisation automatique de l'agenda</li>
-          <li>Une interface simple et efficace</li>
-          <li>La revolution de la creation d'evenements</li>
-          <li>L'expertise PerfectWeek</li>
-        </ul>
-      </div>
-    </div>
+  </div>
+  <div class="card-body description text-center h5">
+    En synchronisant vos calendriers personnels instantanement, Flash
+    <i>by PerfectWeek</i>
+    vous permet de trouver du temps libre pour vos activites en un rien de
+    temps. Notre interface a ete etudiee pour vous offrir la meilleure
+    experience possible grace au savoir faire de PerfectWeek.
+  </div>
+  <div class="card-footer">
+    <button class="create-room text-light" on:click={createRoom}>
+      Essayez maintenant
+    </button>
   </div>
 </div>
