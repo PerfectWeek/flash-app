@@ -15,17 +15,18 @@
   let accessToken;
 
   let startDate = new Date();
-  let endDate = new Date()
+  let endDate = new Date();
   endDate.setDate(startDate.getDate() + 7);
 
   onMount(async () => {
     QRCodeImageSrc = await generateQRCode();
     const roomInfo = await getRoomInfo();
     accessToken = CookiePlugin.get(id);
-    console.log(accessToken);
     if (accessToken) {
-      const slots = await getFreeSlots();
-      console.log(slots);
+      const res = await getFreeSlots();
+      if (res.status === 200) {
+        timeSlots = res.data.slots;
+      }
     }
     //roomMembers = roomInfo.data.room.members;
     roomMembers = [
@@ -49,8 +50,12 @@
 
   async function joinRoom(accessToken) {
     const res = await RequestPlugin.joinRoom(id, accessToken);
-    const slots = await getFreeSlots();
-    console.log(slots);
+    if (res.status === 200) {
+      const slots_res = await getFreeSlots();
+      if (slots_res.status === 200) {
+        timeSlots = slots_res.data.slots;
+      }
+    }
   }
 
   function getAccessToken(win) {
@@ -85,7 +90,9 @@
 </script>
 
 <style>
-
+.calendar {
+  border: none;
+}
 </style>
 
 <div class="container">
@@ -95,13 +102,18 @@
       <RoomInfo {QRCodeImageSrc} {roomMembers} />
     </div>
 
-    <div class="card column col-mx-auto col-9 col-md-12">
+    <div class="calendar column col-mx-auto col-10 col-md-12">
       {#if !accessToken}
         <button class="btn btn-lg centered" on:click={googleAuth}>
           Synchronisez votre calendrier Google
         </button>
       {:else}
-        <TimeSlots {timeSlots} {googleAuth} {accessToken} />
+        <TimeSlots
+          {timeSlots}
+          {googleAuth}
+          {accessToken}
+          {startDate}
+          {endDate} />
       {/if}
     </div>
   </div>
