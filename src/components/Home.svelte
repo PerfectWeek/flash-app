@@ -45,7 +45,6 @@
     cursor: pointer;
     margin-top: 2vh;
   }
-
 </style>
 
 <div class="card text-center text-light">
@@ -55,11 +54,11 @@
     </div>
   </div>
   <div class="card-body description text-center h5">
-    En synchronisant vos calendriers personnels instantanement, Flash
+    En synchronisant vos calendriers personnels instantanément, Flash
     <i>by PerfectWeek</i>
-    vous permet de trouver du temps libre pour vos activites en un rien de
-    temps. Notre interface a ete etudiee pour vous offrir la meilleure
-    experience possible grace au savoir faire de PerfectWeek.
+    vous permet de trouver du temps libre pour vos activités en un rien de
+    temps. Notre interface a été étudiée pour vous offrir la meilleure
+    expérience possible grâce au savoir faire de PerfectWeek.
   </div>
   <div class="card-footer">
     <button class="create-room text-light" on:click={createRoom}>
