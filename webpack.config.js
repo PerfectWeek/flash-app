@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const	Dotenv = require('dotenv-webpack');
 
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
@@ -18,8 +19,8 @@ module.exports = {
 	output: {
 		path: __dirname + '/public',
 		filename: '[name].js',
-    chunkFilename: '[name].[id].js',
-    publicPath: '/'
+		chunkFilename: '[name].[id].js',
+		publicPath: '/'
 	},
 	module: {
 		rules: [
@@ -45,15 +46,16 @@ module.exports = {
 				]
 			}
 		]
-  },
-  devServer: {
-    historyApiFallback: true,
-  },
+	},
+	devServer: {
+		historyApiFallback: true,
+	},
 	mode,
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
-		})
+		}),
+		new Dotenv(),
 	],
-	devtool: prod ? false: 'source-map'
+	devtool: prod ? false : 'source-map'
 };
