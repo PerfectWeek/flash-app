@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://flash-api-by-pw.herokuapp.com/',
-  //baseURL: 'http://localhost:3000/',
+  baseURL: process.env.API_HOST,
 });
 
 
@@ -29,9 +28,9 @@ export function joinRoom(id, accessToken) {
   );
 }
 
-export function getFreeSlots(id, accessToken, startDate, endDate) {
+export function getFreeSlots(id, accessToken, dateInterval) {
   return instance.get(
-    `/rooms/${id}/slots?start_date=${startDate.toISOString()}&end_date=${endDate.toISOString()}`,
+    `/rooms/${id}/slots?start_date=${dateInterval.startDate.toISOString()}&end_date=${dateInterval.endDate.toISOString()}`,
     {
       headers: {
         authorization: `Bearer ${accessToken}`
