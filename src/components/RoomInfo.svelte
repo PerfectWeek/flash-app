@@ -22,6 +22,9 @@
 
   .label {
     margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: mediumblue;
+    color: white;
   }
 </style>
 
@@ -42,7 +45,7 @@
   <div class="card-title h2 text-left">Membres</div>
   <div class="members-list">
     {#each roomMembers as member}
-      <span class="label label">{member.email}</span>
+      <span class="label">{member.email}</span>
     {/each}
   </div>
 </div>

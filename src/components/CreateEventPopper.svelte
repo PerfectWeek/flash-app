@@ -16,16 +16,16 @@
 
 <div class="card popper" style="display: none;">
   <div class="card-header">
-    <div class="card-title h5">Recapitulatif</div>
+    <div class="card-title h5">Récapitulatif</div>
   </div>
   <div class="card-body">
-    Debut: {focusedDateInterval.startDate.toLocaleString('fr-FR', { timeZone: 'UTC' })}
+    Début: {focusedDateInterval.startDate.toLocaleString('fr-FR', { timeZone: 'UTC' })}
     <br />
     Fin: {focusedDateInterval.endDate.toLocaleString('fr-FR', { timeZone: 'UTC' })}
   </div>
   <div class="card-footer">
     <button class="btn btn-primary" on:click={createEvent}>
-      Creer l'evenement
+      Créer l'événement
     </button>
   </div>
 </div>
