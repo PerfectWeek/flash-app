@@ -1,9 +1,11 @@
 <script>
   import { onMount } from "svelte";
+  import io from "socket.io-client";
 
   import * as RequestPlugin from "../plugins/Request.js";
   import * as QRCodePlugin from "../plugins/QRCode.js";
   import * as CookiePlugin from "../plugins/Cookie.js";
+  import DateInterval from "../plugins/DateInterval.js";
   import RoomInfo from "./RoomInfo.svelte";
   import TimeSlots from "./TimeSlots.svelte";
 
@@ -13,14 +15,13 @@
   let roomMembers = [];
   let timeSlots = [];
   let accessToken;
+  let socket;
 
-  let startDate = new Date();
-  let endDate = new Date();
-  endDate.setDate(startDate.getDate() + 7);
+  const dateInterval = new DateInterval();
 
   onMount(async () => {
     QRCodeImageSrc = await generateQRCode();
-    const roomInfo = await getRoomInfo();
+    roomMembers = await getRoomMembers();
     accessToken = CookiePlugin.get(id);
     if (accessToken) {
       const res = await getFreeSlots();
@@ -28,34 +29,30 @@
         timeSlots = res.data.slots;
       }
     }
-    //roomMembers = roomInfo.data.room.members;
-    roomMembers = [
-      "matthias.alif@gmail.com",
-      "tim92i@gmail.com",
-      "matthias.alif@epitech.eu",
-      "matthias.alif@gmail.com",
-      "tim92i@gmail.com",
-      "matthias.alif@epitech.eu",
-      "matthias.alif@gmail.com",
-      "tim92i@gmail.com",
-      "matthias.alif@epitech.eu",
-      "matthias.alif@gmail.com",
-      "tim92i@gmail.com",
-      "matthias.alif@epitech.eu",
-      "matthias.alif@gmail.com",
-      "tim92i@gmail.com",
-      "matthias.alif@epitech.eu"
-    ];
+    if (accessToken) {
+      joinRoomSocket();
+    }
   });
 
   async function joinRoom(accessToken) {
     const res = await RequestPlugin.joinRoom(id, accessToken);
     if (res.status === 200) {
-      const slots_res = await getFreeSlots();
-      if (slots_res.status === 200) {
-        timeSlots = slots_res.data.slots;
-      }
+      joinRoomSocket();
     }
+  }
+
+  function joinRoomSocket() {
+    socket = io(`${process.env.API_HOST}`);
+
+    socket.emit("join", id);
+
+    socket.on("newUser", async () => {
+      roomMembers = await getRoomMembers();
+      const slotsRes = await getFreeSlots();
+      if (slotsRes.status === 200) {
+        timeSlots = slotsRes.data.slots;
+      }
+    });
   }
 
   function getAccessToken(win) {
@@ -80,19 +77,23 @@
     return QRCodePlugin.generate(window.location.href);
   }
 
-  function getRoomInfo() {
-    return RequestPlugin.getRoomInfo(id);
+  async function getRoomMembers() {
+    const res = await RequestPlugin.getRoomInfo(id);
+    if (res.status === 200) {
+      return res.data.room.members;
+    }
+    return null;
   }
 
   function getFreeSlots() {
-    return RequestPlugin.getFreeSlots(id, accessToken, startDate, endDate);
+    return RequestPlugin.getFreeSlots(id, accessToken, dateInterval);
   }
 </script>
 
 <style>
-.calendar {
-  border: none;
-}
+  .calendar {
+    border: none;
+  }
 </style>
 
 <div class="container">
@@ -108,12 +109,7 @@
           Synchronisez votre calendrier Google
         </button>
       {:else}
-        <TimeSlots
-          {timeSlots}
-          {googleAuth}
-          {accessToken}
-          {startDate}
-          {endDate} />
+        <TimeSlots {timeSlots} {googleAuth} {accessToken} {socket} />
       {/if}
     </div>
   </div>

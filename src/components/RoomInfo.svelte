@@ -42,7 +42,7 @@
   <div class="card-title h2 text-left">Membres</div>
   <div class="members-list">
     {#each roomMembers as member}
-      <span class="label label">{member}</span>
+      <span class="label label">{member.email}</span>
     {/each}
   </div>
 </div>

@@ -17,15 +17,14 @@ export default class CalendarPlugin {
       locale: frLocale,
       columnHeaderFormat: { weekday: "short" },
       allDaySlot: false,
-      eventColor: '#378006',
+      eventColor: 'midnightblue',
       slotLabelFormat: {
         hour: 'numeric',
         minute: '2-digit',
         omitZeroMinute: false,
         meridiem: 'short'
       },
-      select: function(selectionInfo) {
-        console.log(selectionInfo);
+      select: function (selectionInfo) {
         onSelectFn(selectionInfo.startStr, selectionInfo.endStr);
       },
     });
@@ -37,7 +36,12 @@ export default class CalendarPlugin {
   }
 
   loadEvents(events) {
+    this.calendar.removeAllEvents();
     events.map(e => this.calendar.addEvent({ start: e.startTime, end: e.endTime }));
+  }
+
+  focus(start, end) {
+    this.calendar.select(start, end);
   }
 
 }
