@@ -33,6 +33,6 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "webpack-dev-server --content-base public --port 5000",
-    "start": "npm run build && serve -s public"
+    "start": "serve -s public"
   }
 }
