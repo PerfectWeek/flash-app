@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.API_HOST,
+  baseURL: process.env.FLASH_API_URI,
 });
 
 
