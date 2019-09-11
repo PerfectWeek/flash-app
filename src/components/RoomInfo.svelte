@@ -23,8 +23,9 @@
   .label {
     margin-top: 0.5rem;
     padding: 0.5rem;
-    background-color: mediumblue;
+    background-color: cadetblue;
     color: white;
+    border-radius: 5px;
   }
 </style>
 

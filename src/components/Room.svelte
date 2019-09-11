@@ -94,12 +94,22 @@
   .calendar {
     border: none;
   }
+
+  .full-height {
+    min-height: 90%;
+  }
+
+  .light-grey {
+    background-color: #f7f7f7;
+  }
 </style>
 
-<div class="container">
-  <div class="columns">
+<div class="container full-height">
+  <div class="columns full-height">
 
-    <div class="card column col-mx-auto col-2 col-md-12 text-center text-dark">
+    <div
+      class="card column light-grey col-mx-auto col-2 col-md-12 text-center
+      text-dark">
       <RoomInfo {QRCodeImageSrc} {roomMembers} />
     </div>
 
