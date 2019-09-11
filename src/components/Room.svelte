@@ -42,7 +42,7 @@
   }
 
   function joinRoomSocket() {
-    socket = io(`${process.env.API_HOST}`);
+    socket = io('api.flash.perfect-week.pw');
 
     socket.emit("join", id);
 
