@@ -11,7 +11,7 @@
     if (res.status === 201) {
       navigate(`/${res.data.room.id}`);
     } else {
-      alert("An error occured, try again later");
+      console.error(res.statusText);
     }
   }
 </script>

@@ -12,7 +12,8 @@
       const access_token = res.data.access_token;
       CookiePlugin.set("access_token", access_token);
       window.close();
+    } else {
+      console.error(res.statusText);
     }
-    Alert("Une erreur est survenue lors de l'authentification");
   });
 </script>
