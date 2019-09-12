@@ -59,11 +59,19 @@
   }
 
   function focusTimeslot(start, end) {
-    if (start !== startTime && end !== endTime) {
+    start = new Date(start);
+    end = new Date(end);
+    if (
+      start.getTime() !== focusedDateInterval.startDate.getTime() &&
+      end.getTime() !== focusedDateInterval.endDate.getTime()
+    ) {
       focusedDateInterval.startDate = new Date(start);
       focusedDateInterval.endDate = new Date(end);
-      emitFocusTimeslot(startTime, endTime);
-      displayPopper(startTime, endTime);
+      emitFocusTimeslot(
+        focusedDateInterval.startDate,
+        focusedDateInterval.endDate
+      );
+      displayPopper(focusedDateInterval.startDate, focusedDateInterval.endDate);
     }
   }
 
@@ -84,4 +92,4 @@
 </style>
 
 <div id="calendar" />
-<CreateEventPopper {focusedDateInterval} {createEvent}/>
+<CreateEventPopper {focusedDateInterval} {createEvent} />
