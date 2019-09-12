@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import Popper from "popper.js";
 
+  import * as CreateGoogleEventPlugin from "../plugins/CreateGoogleEvent.js";
   import CreateEventPopper from "./CreateEventPopper.svelte";
   import CalendarPlugin from "../plugins/Calendar.js";
   import DateInterval from "../plugins/DateInterval.js";
@@ -45,9 +46,6 @@
     const focusedElement = document.querySelector(".fc-highlight");
     const popper = document.querySelector(".popper");
 
-    focusedDateInterval.startDate.setDate(start);
-    focusedDateInterval.endDate.setDate(end);
-
     popper.style.display = "block";
     popper.style.zIndex = 100;
 
@@ -62,11 +60,22 @@
 
   function focusTimeslot(start, end) {
     if (start !== startTime && end !== endTime) {
-      startTime = start;
-      endTime = end;
-      emitFocusTimeslot(start, end);
-      displayPopper(start, end);
+      focusedDateInterval.startDate = new Date(start);
+      focusedDateInterval.endDate = new Date(end);
+      emitFocusTimeslot(startTime, endTime);
+      displayPopper(startTime, endTime);
     }
+  }
+
+  function createEvent() {
+    console.log(focusedDateInterval);
+    window.open(
+      CreateGoogleEventPlugin.getEventCreationUrl(
+        focusedDateInterval.startDate,
+        focusedDateInterval.endDate
+      ),
+      "Add the event to your calendar"
+    );
   }
 </script>
 
@@ -75,4 +84,4 @@
 </style>
 
 <div id="calendar" />
-<CreateEventPopper {focusedDateInterval} />
+<CreateEventPopper {focusedDateInterval} {createEvent}/>

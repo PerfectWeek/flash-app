@@ -1,17 +1,6 @@
 <script>
-  import * as CreateGoogleEventPlugin from "../plugins/CreateGoogleEvent.js";
-
   export let focusedDateInterval;
-
-  function createEvent() {
-    window.open(
-      CreateGoogleEventPlugin.getEventCreationUrl(
-        focusedDateInterval.startDate,
-        focusedDateInterval.endDate
-      ),
-      "Add the event to your calendar"
-    );
-  }
+  export let createEvent;
 </script>
 
 <div class="card popper" style="display: none;">
