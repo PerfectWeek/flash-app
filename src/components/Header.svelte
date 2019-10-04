@@ -4,11 +4,10 @@
 
 <style>
   .title {
-    border-bottom: solid 1px;
+    border-bottom: solid 2px;
     font-size: 1rem;
     cursor: pointer;
     margin: 1rem auto;
-    color: midnightblue;
   }
 </style>
 
