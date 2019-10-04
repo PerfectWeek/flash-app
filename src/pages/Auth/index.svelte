@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
 
-  import * as RequestPlugin from "../plugins/Request.js";
-  import * as CookiePlugin from "../plugins/Cookie.js";
+  import * as RequestPlugin from "../../plugins/Request.js";
+  import * as CookiePlugin from "../../plugins/Cookie.js";
 
   onMount(async () => {
     const url = new URL(window.location.href);

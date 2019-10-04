@@ -2,10 +2,10 @@
   import { onMount } from "svelte";
   import Popper from "popper.js";
 
-  import * as CreateGoogleEventPlugin from "../plugins/CreateGoogleEvent.js";
+  import * as CreateGoogleEventPlugin from "../../plugins/CreateGoogleEvent.js";
   import CreateEventPopper from "./CreateEventPopper.svelte";
-  import CalendarPlugin from "../plugins/Calendar.js";
-  import DateInterval from "../plugins/DateInterval.js";
+  import CalendarPlugin from "../../plugins/Calendar.js";
+  import DateInterval from "../../plugins/DateInterval.js";
 
   export let timeSlots;
   export let accessToken;

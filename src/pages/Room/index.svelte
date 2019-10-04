@@ -2,10 +2,10 @@
   import { onMount } from "svelte";
   import io from "socket.io-client";
 
-  import * as RequestPlugin from "../plugins/Request.js";
-  import * as QRCodePlugin from "../plugins/QRCode.js";
-  import * as CookiePlugin from "../plugins/Cookie.js";
-  import DateInterval from "../plugins/DateInterval.js";
+  import * as RequestPlugin from "../../plugins/Request.js";
+  import * as QRCodePlugin from "../../plugins/QRCode.js";
+  import * as CookiePlugin from "../../plugins/Cookie.js";
+  import DateInterval from "../../plugins/DateInterval.js";
   import RoomInfo from "./RoomInfo.svelte";
   import TimeSlots from "./TimeSlots.svelte";
 
@@ -42,7 +42,7 @@
   }
 
   function joinRoomSocket() {
-    socket = io('api.flash.perfect-week.pw');
+    socket = io('localhost:3000');
 
     socket.emit("join", id);
 

@@ -1,6 +1,6 @@
 <script>
   import { navigate } from "svelte-routing";
-  import * as RequestPlugin from "../plugins/Request.js";
+  import * as RequestPlugin from "../../plugins/Request.js";
 
   const timeAverage = 27;
 

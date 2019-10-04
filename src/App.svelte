@@ -11,10 +11,11 @@
   import "../node_modules/spectre.css/dist/spectre-icons.css";
   import "../node_modules/spectre.css/dist/spectre.css";
 
+  import Home from "./pages/Home";
+  import Room from "./pages/Room";
+  import Auth from "./pages/Auth";
+
   import Header from "./components/Header.svelte";
-  import Home from "./components/Home.svelte";
-  import Room from "./components/Room.svelte";
-  import Auth from "./components/Auth.svelte";
   import Footer from "./components/Footer.svelte";
 
   export let url = "";
