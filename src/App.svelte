@@ -15,9 +15,6 @@
   import Room from "./pages/Room";
   import Auth from "./pages/Auth";
 
-  import Header from "./components/Header.svelte";
-  import Footer from "./components/Footer.svelte";
-
   export let url = "";
 
   function home() {
@@ -62,11 +59,9 @@
 <div class="background"></div>
   <div class="app">
     <Router {url}>
-      <Header {home} />
       <Route path="/" component={Home} />
       <Route path="/:id" component={Room} />
       <Route path="/auth" component={Auth} />
     </Router>
-    <Footer />
   </div>
 </div>

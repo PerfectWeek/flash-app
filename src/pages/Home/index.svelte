@@ -2,7 +2,8 @@
   import { navigate } from "svelte-routing";
   import * as RequestPlugin from "../../plugins/Request.js";
 
-  const timeAverage = 27;
+  import Header from "../../components/Header.svelte";
+  import Footer from "../../components/Footer.svelte";
 
   async function createRoom() {
     const res = await RequestPlugin.createRoom();
@@ -22,7 +23,7 @@
   }
 
   .headline {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 2.7rem;
   }
 
@@ -53,6 +54,7 @@
   }
 </style>
 
+<Header/>
 <div class="card text-center">
   <div class="card-header">
     <div class="card-title h1 headline">
@@ -71,3 +73,4 @@
     </button>
   </div>
 </div>
+<Footer />
