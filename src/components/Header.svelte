@@ -1,4 +1,12 @@
+<script>
+  import Title from "./Title.svelte";
+</script>
+
 <style>
+  .center {
+    margin: auto;
+  }
+
   .title {
     border-bottom: solid 2px;
     font-size: 1rem;
@@ -8,10 +16,7 @@
 </style>
 
 <header class="navbar">
-  <section class="navbar-center title">
-    <h2>
-      Flash
-      <i>by PerfectWeek</i>
-    </h2>
+  <section class="center title">
+    <Title clickable={false} />
   </section>
 </header>

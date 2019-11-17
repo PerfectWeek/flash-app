@@ -12,14 +12,10 @@
   import "../node_modules/spectre.css/dist/spectre.css";
 
   import Home from "./pages/Home";
-  import Room from "./pages/Room";
+  import Room from "./pages/NewRoom";
   import Auth from "./pages/Auth";
 
   export let url = "";
-
-  function home() {
-    navigate("/");
-  }
 </script>
 
 <style>

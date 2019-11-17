@@ -12,7 +12,7 @@ export default class CalendarPlugin {
       header: false,
       slotDuration: "01:00:00",
       selectable: true,
-      height: 700,
+      height: "parent",
       scrollTime: "09:00:00",
       locale: frLocale,
       columnHeaderFormat: { weekday: "short" },
@@ -25,7 +25,7 @@ export default class CalendarPlugin {
         meridiem: 'short'
       },
       select: function (selectionInfo) {
-        onSelectFn(selectionInfo.startStr, selectionInfo.endStr);
+        onSelectFn(selectionInfo.start, selectionInfo.end);
       },
     });
 

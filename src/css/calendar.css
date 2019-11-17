@@ -9,3 +9,11 @@
 .body {
   background-color: red;
 }
+
+.fc th, .fc td {
+  border-left-style: none !important;
+}
+
+.fc-time {
+  border: none !important;
+}

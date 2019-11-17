@@ -1,9 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
+
+import * as CookiePlugin from "./Cookie";
 
 const instance = axios.create({
-  baseURL: 'https://api.flash.perfect-week.pw/',
+  baseURL: "http://localhost:3000"
 });
-
 
 //
 // Rooms related requests
@@ -16,24 +17,24 @@ export function getRoomInfo(id) {
   return instance.get(`/rooms/${id}`);
 }
 
-export function joinRoom(id, accessToken) {
+export function joinRoom(id) {
   return instance.put(
     `/rooms/${id}`,
     {},
     {
       headers: {
-        authorization: `Bearer ${accessToken}`
+        authorization: `Bearer ${CookiePlugin.get(id)}`
       }
     }
   );
 }
 
-export function getFreeSlots(id, accessToken, dateInterval) {
+export function getEvents(id, dateInterval) {
   return instance.get(
     `/rooms/${id}/slots?start_date=${dateInterval.startDate.toISOString()}&end_date=${dateInterval.endDate.toISOString()}`,
     {
       headers: {
-        authorization: `Bearer ${accessToken}`
+        authorization: `Bearer ${CookiePlugin.get(id)}`
       }
     }
   );
