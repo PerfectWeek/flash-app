@@ -3,7 +3,7 @@ import io from "socket.io-client";
 export default class Socket {
   constructor(id) {
     this.id = id;
-    this.io = io("localhost:3000"); // TODO USE ENV VAR OR CONFIG FILE
+    this.io = io(process.env.API_URL); // TODO USE ENV VAR OR CONFIG FILE
   }
 
   join() {

@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 
 const mode = process.env.NODE_ENV || "development";
 const prod = mode === "production";
@@ -59,7 +59,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css"
     }),
-    new Dotenv()
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify(process.env.API_URL),
+    })
   ],
   devtool: prod ? false : "source-map"
 };

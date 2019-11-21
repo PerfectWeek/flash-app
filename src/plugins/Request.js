@@ -4,7 +4,7 @@ import qs from "querystring";
 import * as CookiePlugin from "./Cookie";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: process.env.API_URL
 });
 
 //
