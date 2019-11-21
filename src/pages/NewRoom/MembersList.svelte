@@ -30,10 +30,6 @@
   }
 
   .user {
-    border: solid 1px blue;
-  }
-
-  .user-name {
     font-weight: bold;
   }
 </style>
@@ -41,13 +37,10 @@
 <ul class="members-list">
   {#each members as member}
     <li class="member">
-      <img
-        src={member.picture}
-        class={member.name === userName ? 'picture user' : 'picture'}
-        alt="pic" />
-      <div
-      class={member.name === userName ? 'name user-name' : 'name'}
-      >{member.name}</div>
+      <img src={member.picture} class="picture" alt="pic" />
+      <div class={member.name === userName ? 'name user' : 'name'}>
+        {member.name}
+      </div>
     </li>
   {/each}
 </ul>

@@ -6,8 +6,10 @@
   import CalendarPlugin from "../../plugins/Calendar.js";
   import * as RequestPlugin from "../../plugins/Request.js";
   import DateInterval from "../../plugins/DateInterval.js";
+  import { getEventCreationUrl } from "../../plugins/CreateGoogleEvent.js";
 
   import CreateEventPopper from "./CreateEventPopper.svelte";
+  import TopBar from "./TopBar.svelte";
 
   const focusedDateInterval = new DateInterval();
 
@@ -64,10 +66,24 @@
     displayEventPopper();
   }
 
-  function createEvent() {}
+  function createEvent() {
+    window.open(getEventCreationUrl(focusedDateInterval.startDate, focusedDateInterval.endDate));
+  }
+
+  function prev() {
+    calendar.prev();
+  }
+
+  function next() {
+    calendar.next();
+  }
 </script>
 
 <style>
+  .top-bar {
+    height: 6%;
+  }
+
   #calendar {
     width: 100%;
     height: 100%;
@@ -76,6 +92,9 @@
   }
 </style>
 
+<div class="top-bar">
+  <TopBar {id} {isLogged} {io} {prev} {next} />
+</div>
 <div id="calendar" />
 
 <CreateEventPopper {focusedDateInterval} {createEvent} />

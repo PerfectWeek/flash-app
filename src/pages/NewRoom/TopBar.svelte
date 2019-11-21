@@ -27,6 +27,8 @@
   export let isLogged;
   export let io;
   export let title = "";
+  export let prev;
+  export let next;
 
   $: {
     if (isLogged === true) {
@@ -39,10 +41,22 @@
   #title:focus {
     outline: 0px solid transparent;
   }
+
+  .calendar-action {
+    margin-right: 1vw;
+  }
 </style>
 
 <header class="navbar">
   <section class="navbar-section">
     <h2 id="title" contenteditable="true" bind:textContent={title}>{title}</h2>
+  </section>
+  <section class="navbar-section">
+    <button class="btn calendar-action" on:click={prev}>
+      <i class="icon icon-arrow-left" />
+    </button>
+    <button class="btn calendar-action" on:click={next}>
+      <i class="icon icon-arrow-right" />
+    </button>
   </section>
 </header>

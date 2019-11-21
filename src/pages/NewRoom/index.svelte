@@ -8,7 +8,6 @@
   import SyncCalendarCard from "./SyncCalendarCard.svelte";
   import Calendar from "./Calendar.svelte";
   import ShareRoom from "./ShareRoom.svelte";
-  import TopBar from "./TopBar.svelte";
 
   export let id;
   export let isLogged = undefined;
@@ -64,9 +63,6 @@
     height: 100%;
   }
 
-  .top-bar {
-    height: 6%;
-  }
   .calendar {
     height: 94%;
   }
@@ -81,9 +77,6 @@
       <ShareRoom {id} {isLogged} {io} />
     </div>
     <div class="column col-10 col-md-12 main-view">
-      <div class="top-bar">
-        <TopBar {id} {isLogged} {io} />
-      </div>
       <div class="calendar">
         <Calendar {id} {isLogged} {io} {title} />
       </div>
