@@ -22,10 +22,21 @@
   });
 
   let members = [];
+  let userName = "";
+
+
+  async function getUserInfo() {
+    const res = await RequestPlugin.getUserInfo(id);
+    if (res.status === 200) {
+      userName = res.data.user;
+    }
+  }
+
 
   $: {
-    if (isLogged !== undefined) {
+    if (isLogged === true) {
       updateRoomInfo();
+      getUserInfo();
     }
   }
 
@@ -98,7 +109,7 @@
       Membres du salon
     </summary>
     <div class="accordion-body">
-      <MembersList {members} />
+      <MembersList {members} {userName}/>
     </div>
   </details>
   <div class="footer">

@@ -1,15 +1,16 @@
 <script>
   export let members;
+  export let userName;
 </script>
 
 <style>
   .members-list {
     margin-top: 0;
     list-style-type: none;
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: .25px;
+    letter-spacing: 0.25px;
   }
 
   .member {
@@ -27,13 +28,26 @@
     border-radius: 50px;
     margin-right: 1vw;
   }
+
+  .user {
+    border: solid 1px blue;
+  }
+
+  .user-name {
+    font-weight: bold;
+  }
 </style>
 
 <ul class="members-list">
   {#each members as member}
     <li class="member">
-      <img src={member.picture} class="picture" alt="pic" />
-      <div class="name">{member.name}</div>
+      <img
+        src={member.picture}
+        class={member.name === userName ? 'picture user' : 'picture'}
+        alt="pic" />
+      <div
+      class={member.name === userName ? 'name user-name' : 'name'}
+      >{member.name}</div>
     </li>
   {/each}
 </ul>

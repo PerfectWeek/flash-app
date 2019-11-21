@@ -1,5 +1,5 @@
 import axios from "axios";
-import qs from 'querystring';
+import qs from "querystring";
 
 import * as CookiePlugin from "./Cookie";
 
@@ -19,15 +19,11 @@ export function getRoomInfo(id) {
 }
 
 export function setRoomTitle(id, title) {
-  return instance.put(
-    `/rooms/${id}/title`,
-    qs.stringify({ title: title }),
-    {
-      headers: {
-        authorization: `Bearer ${CookiePlugin.get(id)}`
-      }
+  return instance.put(`/rooms/${id}/title`, qs.stringify({ title: title }), {
+    headers: {
+      authorization: `Bearer ${CookiePlugin.get(id)}`
     }
-  );
+  });
 }
 
 export function joinRoom(id) {
@@ -62,4 +58,12 @@ export function authenticate() {
 
 export function sendCode(code) {
   return instance.get(`/authenticate?code=${code}`);
+}
+
+export function getUserInfo(id) {
+  return instance.get("/me", {
+    headers: {
+      authorization: `Bearer ${CookiePlugin.get(id)}`
+    }
+  });
 }
