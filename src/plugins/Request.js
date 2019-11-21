@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from 'querystring';
 
 import * as CookiePlugin from "./Cookie";
 
@@ -15,6 +16,18 @@ export function createRoom() {
 
 export function getRoomInfo(id) {
   return instance.get(`/rooms/${id}`);
+}
+
+export function setRoomTitle(id, title) {
+  return instance.put(
+    `/rooms/${id}/title`,
+    qs.stringify({ title: title }),
+    {
+      headers: {
+        authorization: `Bearer ${CookiePlugin.get(id)}`
+      }
+    }
+  );
 }
 
 export function joinRoom(id) {

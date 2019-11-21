@@ -54,7 +54,7 @@
   }
 </style>
 
-<Header/>
+<Header />
 <div class="card text-center">
   <div class="card-header">
     <div class="card-title h1 headline">

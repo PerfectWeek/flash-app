@@ -18,7 +18,6 @@
   export let io;
 
   io.getIo().on("newUser", () => {
-    console.log("User has joined");
     updateRoomInfo();
   });
 

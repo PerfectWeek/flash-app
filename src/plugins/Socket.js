@@ -19,6 +19,10 @@ export default class Socket {
     );
   }
 
+  setRoomTitle(title) {
+    this.io.emit("setRoomTitle", this.id, title);
+  }
+
   getIo() {
     return this.io;
   }

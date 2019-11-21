@@ -1,38 +1,25 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, getContext } from "svelte";
 
-  import * as RequestPlugin from "../plugins/Request.js";
   import * as CookiePlugin from "../plugins/Cookie.js";
 
+  let googleAuth;
   export let synced = false;
 
   export let id;
 
+  function auth() {
+    googleAuth();
+  }
+
   onMount(() => {
+    googleAuth = getContext('googleAuth');
     const accessToken = CookiePlugin.get(id);
     if (accessToken) {
       synced = true;
     }
   });
 
-  function getAccessToken(win) {
-    var timer = setInterval(async () => {
-      if (win.closed) {
-        clearInterval(timer);
-        const access_token = CookiePlugin.get("access_token");
-        CookiePlugin.set(id, access_token);
-        CookiePlugin.remove("access_token");
-        await RequestPlugin.joinRoom(id);
-        synced = true;
-      }
-    }, 1000);
-  }
-
-  async function googleAuth() {
-    const res = await RequestPlugin.authenticate();
-    const win = window.open(res.data, "Login with Google");
-    getAccessToken(win);
-  }
 </script>
 
 <style>
@@ -82,7 +69,7 @@
   }
 </style>
 
-<button type="button" class="google-button" on:click={googleAuth}>
+<button type="button" class="google-button" on:click={auth}>
   <span class="google-button__icon">
     <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg">
       <path
