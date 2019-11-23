@@ -17,6 +17,8 @@
   export let isLogged;
   export let io;
 
+  let popperInstance;
+
   let calendar;
 
   io.getIo().on("focusTimeslot", focus);
@@ -36,9 +38,11 @@
     calendar = new CalendarPlugin(calendarEl, onSelect);
     calendar.render();
   });
+
   $: if (isLogged === true) {
     populateCalendar();
   }
+
   async function populateCalendar() {
     const res = await RequestPlugin.getEvents(id, focusedDateInterval);
     if (res.status === 200) {
@@ -53,7 +57,7 @@
     popper.style.display = "block";
     popper.style.zIndex = 10;
 
-    var popperInstance = new Popper(focusedElement, popper, {
+    popperInstance = new Popper(focusedElement, popper, {
       placement: "right"
     });
   }
@@ -67,14 +71,25 @@
   }
 
   function createEvent() {
-    window.open(getEventCreationUrl(focusedDateInterval.startDate, focusedDateInterval.endDate));
+    window.open(
+      getEventCreationUrl(
+        focusedDateInterval.startDate,
+        focusedDateInterval.endDate
+      )
+    );
   }
 
   function prev() {
+    if (popperInstance) {
+      popperInstance.destroy();
+    }
     calendar.prev();
   }
 
   function next() {
+    if (popperInstance) {
+      popperInstance.destroy();
+    }
     calendar.next();
   }
 </script>
