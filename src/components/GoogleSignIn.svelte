@@ -35,6 +35,7 @@
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
     padding: 0;
+    cursor: pointer;
   }
   .google-button:focus,
   .google-button:hover {

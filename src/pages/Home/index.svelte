@@ -28,15 +28,59 @@
   }
 
   .round-button {
-    border: solid 1px;
-    background: rgba(0, 0, 0, 0);
-    border-radius: 50px;
-    transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
+    border: none;
+    display: inline-block;
+    border-radius: 99px;
+    color: white;
+    position: relative;
+    z-index: 1;
+    padding: 17px 35px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
-  .round-button:hover {
-    background-color: white;
-    color: black !important;
+  .round-button:before,
+  .round-button:after {
+    content: " ";
+    position: absolute;
+    border-radius: 99px;
+  }
+
+  .round-button:before {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -2;
+    background: #503b9a;
+    background: -moz-linear-gradient(left, #503b9a 0%, #269cc1 100%);
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(0%, #503b9a),
+      color-stop(100%, #269cc1)
+    );
+    background: -webkit-linear-gradient(left, #503b9a 0%, #269cc1 100%);
+    background: -o-linear-gradient(left, #503b9a 0%, #269cc1 100%);
+    background: -ms-linear-gradient(left, #503b9a 0%, #269cc1 100%);
+    background: linear-gradient(to right, #503b9a 0%, #269cc1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#503b9a', endColorstr='#269cc1',GradientType=1 );
+  }
+
+  .round-button:after {
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    background-color: black;
+    z-index: -1;
+    opacity: 1;
+    transition: all 0.6s ease-in-out;
+  }
+
+  .round-button:hover:after {
+    opacity: 0;
   }
 
   .description {
@@ -48,7 +92,7 @@
   .create-room {
     width: 70%;
     max-width: 400px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
     margin-top: 2vh;
   }
