@@ -1,9 +1,12 @@
 import io from "socket.io-client";
 
 export default class Socket {
+
   constructor(id) {
+    this.timestamp = null;
     this.id = id;
-    this.io = io("https://api.flash.perfect-week.pw"); // TODO USE ENV VAR OR CONFIG FILE
+    // this.io = io("https://api.flash.perfect-week.pw");
+    this.io = io("https://flash-api-by-pw.herokuapp.com");
   }
 
   join() {
@@ -11,12 +14,16 @@ export default class Socket {
   }
 
   focusTimeslot(timeSlot) {
-    this.io.emit(
-      "focusTimeslot",
-      this.id,
-      timeSlot.startDate,
-      timeSlot.endDate
-    );
+    const time = new Date();
+    if (!this.timestamp || time - this.timestamp > 100) { // More than one second after previous request
+      this.timestamp = time;
+      this.io.emit(
+        "focusTimeslot",
+        this.id,
+        timeSlot.startDate,
+        timeSlot.endDate
+        );
+      }
   }
 
   setRoomTitle(title) {

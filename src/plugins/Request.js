@@ -4,7 +4,8 @@ import qs from "querystring";
 import * as CookiePlugin from "./Cookie";
 
 const instance = axios.create({
-  baseURL: "https://api.flash.perfect-week.pw"
+  // baseURL: "https://api.flash.perfect-week.pw"
+  baseURL: "https://flash-api-by-pw.herokuapp.com"
 });
 
 //
