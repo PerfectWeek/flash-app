@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { navigate } from "svelte-routing";
 
   import Popper from "popper.js";
 
@@ -23,6 +24,8 @@
 
   io.getIo().on("focusTimeslot", focus);
 
+  io.getIo().on("eventCreated", loadEnd);
+
   function focus(timeslot) {
     if (
       focusedDateInterval.startDate.toISOString() !== timeslot.start ||
@@ -41,6 +44,12 @@
 
   $: if (isLogged === true) {
     populateCalendar();
+  }
+
+  function loadEnd() {
+    const modal = document.getElementById("modal-id");
+
+    modal.classList.add("active");
   }
 
   async function populateCalendar() {
@@ -77,6 +86,7 @@
         focusedDateInterval.endDate
       )
     );
+    io.getIo().emit("eventCreated", id);
   }
 
   function prev() {
@@ -111,5 +121,18 @@
   <TopBar {id} {isLogged} {io} {prev} {next} />
 </div>
 <div id="calendar" />
+
+<div class="modal" id="modal-id">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title h5">Merci d'avoir utilisé Flash</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+        Pour découvrir toutes nos fonctionnalités avancées, visitez <a href="https://app.perfect-week.pw">le site PerfectWeek</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <CreateEventPopper {focusedDateInterval} {createEvent} />

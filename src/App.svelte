@@ -11,9 +11,9 @@
   import "../node_modules/spectre.css/dist/spectre-icons.css";
   import "../node_modules/spectre.css/dist/spectre.css";
 
+  import Auth from "./pages/Auth";
   import Home from "./pages/Home";
   import Room from "./pages/NewRoom";
-  import Auth from "./pages/Auth";
 
   export let url = "";
 </script>
